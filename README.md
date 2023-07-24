@@ -1,2 +1,5 @@
-# printf
-## I'm now a ALX Student, this is my first repository as a full-stack engineer
+# printf Project
+
+### Authors
+* **Esmail Shabayek** - [esmail.shabayek@gmail.com](https://github.com/shabayekdes)
+* **Abdullah Abdallah Saleh** - [abdullah](https://github.com/Abdullahsaleh203)
