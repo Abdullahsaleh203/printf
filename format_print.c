@@ -15,7 +15,7 @@
 int format_print(const char *fmt, int *ind, va_list list, char buffer[],
 	int flags, int width, int precision, int size)
 {
-	int i, printed = 0, printed_chars = 0;
+	int i, len = 0, printed_chars = -1;
 	format_print_t format_types[] = {
 		{'c', print_char},
 		{'s', print_string},
@@ -28,20 +28,17 @@ int format_print(const char *fmt, int *ind, va_list list, char buffer[],
 	for (i = 0; format_types[i].c != '\0'; i++)
 	{
 		if (format_types[i].c == fmt[*ind])
-		{
-			printed = format_types[i].fn(list, buffer, flags, width, precision, size);
-			if (printed == -1)
-				return (-1);
-			printed_chars += printed;
-			break;
-		}
+			return (format_types[i].fn(list, buffer, flags, width, precision, size));
 	}
 	if (format_types[i].c == '\0')
 	{
 		if (fmt[*ind] == '\0')
-			return (-2);
-		_putchar(fmt[*ind]);
-		printed_chars++;
+			return (-1);
+		len += write(1, "%%", 1);
+		if (fmt[*ind - 1] == ' ')
+			len += write(1, " ", 1);
+		len += write(1, &fmt[*ind], 1);
+		return (len);
 	}
 	return (printed_chars);
 }
