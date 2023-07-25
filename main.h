@@ -3,6 +3,7 @@
 #include <stdarg.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <stdlib.h>
 
 /**
  * struct fmt - Struct op
@@ -24,13 +25,13 @@ va_list list, char buffer[], int flags, int width, int precision, int size);
 
 int _putchar(char c);
 
-/* Funtions to print chars and strings */
 int print_char(va_list types, char buffer[],
 	int flags, int width, int precision, int size);
 int print_string(va_list types, char buffer[],
 	int flags, int width, int precision, int size);
 int print_percent(va_list types, char buffer[],
 	int flags, int width, int precision, int size);
+int print_int(va_list types, char buffer[],
+    int flags, int width, int precision, int size);
 
 #endif /* MAIN_H */
-
