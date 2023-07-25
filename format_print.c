@@ -20,6 +20,8 @@ int format_print(const char *fmt, int *ind, va_list list, char buffer[],
 		{'c', print_char},
 		{'s', print_string},
 		{'%', print_percent},
+		{'d', print_int},
+		{'i', print_int},
 		{'\0', NULL}
 	};
 
