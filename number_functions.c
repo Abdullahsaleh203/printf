@@ -22,43 +22,33 @@ int print_int(va_list types, char buffer[],
 	(void)precision;
 	(void)size;
 
-	if (num < 0)
+	(num < 0) ? (num = -num, buffer[j++] = '-') : 0;
+	(num == 0) ? (buffer[j++] = '0') : 0;
+
+	n = num;
+	while (n != 0)
+		n /= 10, i++;
+
+	str = malloc(i * sizeof(char));
+	if (str == NULL)
+		return (-1);
+
+	n = num;
+	while (n != 0)
 	{
-		num = -num;
-		buffer[j] = '-';
+		m = n % 10;
+		str[k++] = m + '0';
+		n /= 10;
+	}
+
+	for (l = k - 1; l >= 0; l--)
+	{
+		buffer[j] = str[l];
 		j++;
 	}
-	if (num == 0)
-	{
-		buffer[j] = '0';
-		j++;
-	}
-	else
-	{
-		n = num;
-		while (n != 0)
-		{
-			n /= 10;
-			i++;
-		}
-		str = malloc(i * sizeof(char));
-		if (str == NULL)
-			return (-1);
-		n = num;
-		while (n != 0)
-		{
-			m = n % 10;
-			str[k] = m + '0';
-			n /= 10;
-			k++;
-		}
-		for (l = k - 1; l >= 0; l--)
-		{
-			buffer[j] = str[l];
-			j++;
-		}
-		free(str);
-	}
+
+	free(str);
 	write(1, buffer, j);
 	return (j);
 }
+

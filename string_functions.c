@@ -1,69 +1,7 @@
 #include "main.h"
 
 /**
- * print_char - Prints a char
- * @types: List a of arguments
- * @buffer: Buffer array to handle print
- * @flags:  Calculates active flags
- * @width: Width
- * @precision: Precision specification
- * @size: Size specifier
- * Return: Number of chars printed
- */
-int print_char(va_list types, char buffer[],
-int flags, int width, int precision, int size)
-{
-char c = va_arg(types, int);
-
-(void)flags;
-(void)width;
-(void)precision;
-(void)size;
-
-buffer[0] = c;
-
-write(1, buffer, 1);
-
-return (1);
-}
-
-/**
- * print_string - Prints a string
- * @types: List a of arguments
- * @buffer: Buffer array to handle print
- * @flags:  Calculates active flags
- * @width: get width.
- * @precision: Precision specification
- * @size: Size specifier
- * Return: Number of chars printed
- */
-int print_string(va_list types, char buffer[],
-int flags, int width, int precision, int size)
-{
-char *str = va_arg(types, char *);
-int i = 0, j = 0;
-(void)flags;
-(void)width;
-(void)precision;
-(void)size;
-
-if (str == NULL)
-
-str = "(null)";
-
-while (str[i] != '\0')
-{
-buffer[j] = str[i];
-i++;
-j++;
-}
-
-write(1, buffer, j);
-
-return (j);
-}
-/**
- * print_percent - Prints a percent sign
+ * print_int - Print int
  * @types: Lista of arguments
  * @buffer: Buffer array to handle print
  * @flags:  Calculates active flags
@@ -72,19 +10,45 @@ return (j);
  * @size: Size specifier
  * Return: Number of chars printed
  */
-int print_percent(va_list types, char buffer[],
-int flags, int width, int precision, int size)
+int print_int(va_list types, char buffer[],
+	int flags, int width, int precision, int size)
 {
-(void)types;
-(void)flags;
-(void)width;
-(void)precision;
-(void)size;
+	int i = 0, j = 0, k = 0, n = 0, m = 0, l = 0;
+	int num = va_arg(types, int);
+	char *str = NULL;
 
-buffer[0] = '%';
+	(void)flags;
+	(void)width;
+	(void)precision;
+	(void)size;
 
-write(1, buffer, 1);
+	(num < 0) ? (num = -num, buffer[j++] = '-') : 0;
+	(num == 0) ? (buffer[j++] = '0') : 0;
 
-return (1);
+	n = num;
+	while (n != 0)
+		n /= 10, i++;
+
+	str = malloc(i * sizeof(char));
+	if (str == NULL)
+		return (-1);
+
+	n = num;
+	while (n != 0)
+	{
+		m = n % 10;
+		str[k++] = m + '0';
+		n /= 10;
+	}
+
+	for (l = k - 1; l >= 0; l--)
+	{
+		buffer[j] = str[l];
+		j++;
+	}
+
+	free(str);
+	write(1, buffer, j);
+	return (j);
 }
 
