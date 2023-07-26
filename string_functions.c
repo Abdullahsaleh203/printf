@@ -51,16 +51,15 @@ if (str == NULL)
 
 str = "(null)";
 
-while (str[i] != '\0')
+
+while (str[i] != '\0' && j < INITIAL_BUFFER_SIZE)
 {
 buffer[j] = str[i];
 i++;
 j++;
 }
 
-write(1, buffer, j);
-
-return (j);
+	return (write(1, buffer, j));
 }
 /**
  * print_percent - Prints a percent sign
@@ -87,4 +86,3 @@ write(1, buffer, 1);
 
 return (1);
 }
-

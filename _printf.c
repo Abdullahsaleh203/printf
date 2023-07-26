@@ -8,8 +8,9 @@
 int _printf(const char *format, ...)
 {
 	int i, printed = 0, printed_chars = 0;
+	int buffer_length = 0;
 	va_list list;
-	char buffer[1024];
+	char buffer[INITIAL_BUFFER_SIZE];
 
 	if (format == NULL)
 		return (-1);
@@ -28,7 +29,12 @@ int _printf(const char *format, ...)
 		}
 		else
 		{
-			_putchar(format[i]);
+			buffer[buffer_length++] = format[i];
+			if (buffer_length <= INITIAL_BUFFER_SIZE)
+			{
+				write(1, buffer, buffer_length);
+				buffer_length = 0;
+			}
 			printed_chars++;
 		}
 	}
@@ -36,5 +42,4 @@ int _printf(const char *format, ...)
 	va_end(list);
 
 	return (printed_chars);
-
 }

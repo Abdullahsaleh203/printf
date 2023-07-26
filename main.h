@@ -5,6 +5,8 @@
 #include <unistd.h>
 #include <stdlib.h>
 
+#define INITIAL_BUFFER_SIZE 1024
+
 /**
  * struct fmt - Struct op
  *
