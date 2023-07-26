@@ -22,6 +22,7 @@ int format_print(const char *fmt, int *ind, va_list list, char buffer[],
 		{'%', print_percent},
 		{'d', print_int},
 		{'i', print_int},
+		{'b', print_binary},
 		{'\0', NULL}
 	};
 

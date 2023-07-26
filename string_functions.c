@@ -11,18 +11,16 @@
  * Return: Number of chars printed
  */
 int print_char(va_list types, char buffer[],
-int flags, int width, int precision, int size)
+	int flags, int width, int precision, int size)
 {
-char c = va_arg(types, int);
+	char c = va_arg(types, int);
+	(void)flags;
+	(void)width;
+	(void)precision;
+	(void)size;
 
-(void)flags;
-(void)width;
-(void)precision;
-(void)size;
-
-buffer[0] = c;
-
-write(1, buffer, 1);
+	buffer[0] = c;
+	write(1, buffer, 1);
 
 return (1);
 }
@@ -52,7 +50,7 @@ if (str == NULL)
 str = "(null)";
 
 
-while (str[i] != '\0' && j < INITIAL_BUFFER_SIZE)
+while (str[i] != '\0' && j < INITIAL_BUFFER_SIZE - 1)
 {
 buffer[j] = str[i];
 i++;
